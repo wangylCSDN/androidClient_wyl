@@ -14,7 +14,9 @@
         android:background="@drawable/background_login_div"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:focusable="true"
+        android:focusableInTouchMode="true" >
         <EditText
             android:id="@+id/login_name"
             android:layout_width="match_parent"
@@ -24,12 +26,14 @@
             android:layout_marginTop="45dp"
             android:singleLine="true"
             android:background="@drawable/qq_edit_login"
-            android:hint="  请输入您的用户名"
-            android:ems="10"
+            android:hint="请输入您的用户id或用户名"
+            android:ems="20"
+            android:textSize="20sp"
+            android:gravity="center_horizontal|center_vertical"
             android:textCursorDrawable="@drawable/edit_cursor_color"
             android:drawableLeft="@android:drawable/ic_menu_myplaces"
             >
-            <requestFocus />
+            <!--<requestFocus />-->
         </EditText>
         <EditText
             android:id="@+id/login_pwd"
@@ -41,7 +45,9 @@
             android:background="@drawable/qq_edit_login"
             android:drawableLeft="@android:drawable/ic_lock_idle_lock"
             android:ems="10"
-            android:hint="  请输入您的密码"
+            android:textSize="20sp"
+            android:hint="请输入您的密码"
+            android:gravity="center_horizontal|center_vertical"
             android:password="true"
             android:singleLine="true"
             android:inputType="textPassword"

@@ -35,23 +35,43 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        check_first();
+        db= DBhelper.getDbHelpter(this).getWritableDatabase();//数据库连接
+        DBhelper.getDbHelpter(this).onCreate(db);//手动调用
         initView();
+        check_first();
 
     }
     private void check_first(){
-        db= DBhelper.getDbHelpter(this).getWritableDatabase();//数据库连接
+
+//        //用户表
+//        String  userSQL = "create table if not exists user" +
+//                "(id integer not null primary key autoincrement," +
+//                "user_id varchar(20) not null,"+
+//                "name varchar(20) not null," +
+//                "password varchar(20) not null," +
+//                "phone varchar(11) not null,"+
+//                "add_datetime datetime not null,"+//用户状态在手机端无效
+//                "authentication varchar(255) not null,"+//权限
+//                "last_login_time datetime not null)";
+//        db.execSQL(userSQL);
+//        //系统参数
+//        String sysSQL ="create table if not exists system_para "+
+//                "(id integer not null primary key autoincrement,"+
+//                "window_title text not null,"+//窗口显示的标题
+//                "deleteDay varchar(10) not null,"+//数据库保留时间
+//                "delayAlarmTime varchar(10) not null,"+
+//                "copyright text)";
+//        db.execSQL(sysSQL);
+
         Cursor cursor = db.rawQuery("select * from user", null);
-        if(cursor.moveToFirst()==false){
+        if(!cursor.moveToFirst()){//判断首行是否存在,这边用if!
             //无账户，需要注册，并且为root账户
-            cursor.close();
             First_flag="1";
-            register_btn.setPressed(true);//直接跳转注册界面
-            //还要传一个标志位
-        }else {
-            cursor.close();
+            //register_btn.setPressed(true);//这个只是按下，并没有释放！搭配false才完成点击动作！
+            register_btn.performClick();
         }
-        return;
+        cursor.close();
+
     }
     private void initView(){
         login_name=(EditText)findViewById(R.id.login_name);
@@ -67,7 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);//获取保存信息
         if(sp.getBoolean("isAuto",false))//key值找不到返回false
         {
-            AutoLogin();
+           AutoLogin();
         }
         if(sp.getBoolean("isRem",false))
         {
@@ -99,25 +119,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             while (cursor.moveToNext()){
                 String name_db=cursor.getString(cursor.getColumnIndex("name"));
                 String pwd_db=cursor.getString(cursor.getColumnIndex("password"));
-                if(name_db==name){
+                String user_id=cursor.getString(cursor.getColumnIndex("user_id"));//这个还不知道是否有用，预留
+                if(name_db.equals(name)||user_id.equals(name)){
                     flag_name=1;
-                    if(pwd_db==pwd){
+                    if(pwd_db.equals(pwd)){
                         String id=cursor.getString(cursor.getColumnIndex("id"));
-                        String user_id=cursor.getString(cursor.getColumnIndex("user_id"));//这个还不知道用处是啥
                         String authentication=cursor.getString(cursor.getColumnIndex("authentication"));
-                        cursor.close();
                         login_intent(name_db,pwd_db,id,user_id,authentication);
+                        cursor.close();
+                        return;//不return会卡
                     }
                     else {
                         Toast.makeText(LoginActivity.this,"密码输入错误",Toast.LENGTH_SHORT).show();
                         login_btn.doResult(false);//回调错误的图案
                         login_btn.reset();
+                        cursor.close();
+                        return;
                     }
                 }
-                cursor.close();
             }
+            cursor.close();
             if(flag_name==0){
-                Toast.makeText(LoginActivity.this,"无该用户",Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(LoginActivity.this,"无该用户,请注册游客用户",Toast.LENGTH_SHORT).show();
                 login_btn.doResult(false);//回调错误的图案
                 login_btn.reset();
             }
@@ -130,33 +154,34 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void login_intent(String name,String pwd,String id,String user_id,String authentication)
     {
 
+        login_btn.doResult(true);
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("user_id",user_id);
         editor.putString("user_name",name);
         editor.putString("user_pwd",pwd);
         String level="";
-        if(authentication=="root")
-        {
-            level="0";
-        }
-        if(authentication=="系统管理员")
+        if(authentication.equals("root"))
         {
             level="1";
         }
-        if(authentication=="软件管理员")
+        if(authentication.equals("系统管理员"))
         {
             level="2";
         }
-        if(authentication=="游客")
+        if(authentication.equals("软件管理员"))
         {
             level="3";
+        }
+        if(authentication.equals("游客"))
+        {
+            level="4";
         }
         editor.putString("level",level);
         editor.apply();
         //app的title
         if(!sp.contains("title")){
             Cursor cursor=db.rawQuery("select * from system_para", null);
-            if(cursor.moveToNext()){
+            while(cursor.moveToNext()){//这个数据库里面也只有1条
                 String title=cursor.getString(cursor.getColumnIndex("window_title"));
                 String copyright=cursor.getString(cursor.getColumnIndex("copyright"));
                 editor.putString("title",title);
@@ -181,22 +206,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             editor.putBoolean("isAuto",false);
         }
         editor.apply();
-        login_btn.doResult(true);
+
+
         Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+
+        //TODO 需不需要进行判断，权限不够直接跳转到主界面
+        //或者全部跳转，在设备确认界面里面低权限的无法操作！类似大动环。
         Intent intent = new Intent();
+        intent.setClass(LoginActivity.this,DeviceConfirmActivity.class);
+        startActivity(intent);
+        finish();
 
     }
     private void RemMess(){
-        String user_name=sp.getString("user_name","");
+        String user_name=sp.getString("user_name","");//这边用id还是name,笑哭
         login_name.setText(user_name);
         String password=sp.getString("user_pwd","");
         login_pwd.setText(password);
         check_remember.setChecked(true);
+        Toast.makeText(LoginActivity.this,"保存的是上次登录的用户名",Toast.LENGTH_SHORT).show();
     }
 
     private void AutoLogin(){
         //直接跳转
         Intent intent=new Intent();
+        intent.setClass(LoginActivity.this,DeviceConfirmActivity.class);
+        startActivity(intent);
+        finish();
 
     }
     private void intent_register(){
