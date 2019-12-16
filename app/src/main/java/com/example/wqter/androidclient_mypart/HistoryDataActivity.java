@@ -443,13 +443,13 @@ public class HistoryDataActivity extends AppCompatActivity implements View.OnCli
             String sql="select * from table_system_historydata_ttyACM"+ device_com.get(select_machine_pos) +"_device"+device_code.get(select_machine_pos)
                     +" where datetime between '"+startDate_tv.getText().toString()+"' and '"+endDate_tv.getText().toString()+"'";
             Cursor cursor=db.rawQuery(sql ,null);
-            if(!cursor.moveToFirst())
-            {
-                cursor.close();
-                nodata.setVisibility(View.VISIBLE);
-            }
-            else {
-                nodata.setVisibility(View.GONE);
+//            if(!cursor.moveToFirst())//不能这样用光标，不然会忽略掉第一行
+//            {
+//                cursor.close();
+//                nodata.setVisibility(View.VISIBLE);
+//            }
+//            else {
+//                nodata.setVisibility(View.GONE);
                 if (select_para.getText().toString().length() == 0){
                     title.add("更新时间");
                     for (int i = 0; i < all_data_comment_ch.get(select_machine_pos).size(); i++) {
@@ -490,7 +490,15 @@ public class HistoryDataActivity extends AppCompatActivity implements View.OnCli
                   //  Log.v("b",content.toString());//数组没问题的！
                 }
                 cursor.close();
+            if(content.size()<=1){
+                nodata.setVisibility(View.VISIBLE);
             }
+            else
+            {
+                nodata.setVisibility(View.GONE);
+            }
+
+//            }
             LoadingDialog.dismiss();
             setList();
             handler.removeCallbacks(SearchTask);

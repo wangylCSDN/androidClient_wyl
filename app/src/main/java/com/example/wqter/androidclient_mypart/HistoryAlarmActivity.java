@@ -177,7 +177,7 @@ public class HistoryAlarmActivity extends AppCompatActivity implements View.OnCl
 
         Calendar calendar = Calendar.getInstance(); //得到日历
         calendar.setTime(dNow);//把当前时间赋给日历
-        calendar.add(Calendar.DAY_OF_MONTH, -1);  //设置为前3天,此时calendar为1天前的时间
+        calendar.add(Calendar.DAY_OF_MONTH, -7);  //设置为前3天,此时calendar为1天前的时间
         dBefore = calendar.getTime();   //得到前一天的时间
 
         startDate_tv.setText(today.format(dBefore)); //开始日期editText赋值
@@ -230,7 +230,7 @@ public class HistoryAlarmActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 select_alarm.setText("");
-                select_machine=(String)machine_spn.getSelectedItem();
+                select_machine=(String)machine_spn.getSelectedItem().toString();
                 select_machine_pos=machine_spn.getSelectedItemPosition();
                 List<String> pop_para_list=new ArrayList<>();
                 pop_para_list=all_alarm_comment_name.get(select_machine_pos);
@@ -255,7 +255,7 @@ public class HistoryAlarmActivity extends AppCompatActivity implements View.OnCl
         for(int j=0;j<pop_name.size();j++){
             pop_comment.add(pop_name.get(j));
         }
-        Log.v("popsize",pop_comment.toString());
+       // Log.v("popsize",pop_comment.toString());
         boolean[] para_isChecked=new boolean[pop_comment.size()];
         String[] alarm_para_s=pop_name.toArray(new String[pop_comment.size()]);
 
@@ -383,6 +383,7 @@ public class HistoryAlarmActivity extends AppCompatActivity implements View.OnCl
             }
             String sql;
             if(select_alarm.getText().toString().length()==0){
+                //查表语句正确，光标使用问题
                  sql="select * from (select * from table_allalarm  where devicename= '"+select_machine+"' and start_datetime between '"+startDate_tv.getText().toString()
                         +"' and '"+endDate_tv.getText().toString()+"' union all select * from table_confirmationalarm where devicename= '"+select_machine+"' and start_datetime between '"
                         +startDate_tv.getText().toString()+"' and '"+endDate_tv.getText().toString()+"') order by start_datetime asc";
@@ -400,19 +401,29 @@ public class HistoryAlarmActivity extends AppCompatActivity implements View.OnCl
                         where=where+"or alarminfo = '"+ all_alarm_comment_name.get(select_machine_pos).get(select_alarm_pos.get(i))+"' ";
                     }
                 }
-                 sql="select * from (select * from table_allalarm  where devicename= '"+select_machine+"' and start_datetime between '"+startDate_tv.getText().toString()
-                        +"' and '"+endDate_tv.getText().toString()+"' and ("+where +") union all select * from table_confirmationalarm where devicename= '"+select_machine+"' and start_datetime between '"
+                 sql="select devicetype,devicename,start_datetime,ending_datetime,alarminfo,alarmtype,alarmreason,solvingmethod from (select * from table_allalarm  where devicename= '"+select_machine+"' and start_datetime between '"+startDate_tv.getText().toString()
+                        +"' and '"+endDate_tv.getText().toString()+"' and ("+where +") UNION ALL select * from table_confirmationalarm where devicename= '"+select_machine+"' and start_datetime between '"
                         +startDate_tv.getText().toString()+"' and '"+endDate_tv.getText().toString()+"' and ("+where+")) order by start_datetime asc";
             }
-
+//            String start=startDate_tv.getText().toString();
+//            String end =endDate_tv.getText().toString();
+//            Cursor cursor=db.rawQuery(sql,new String[]{select_machine,start,end});
             Cursor cursor=db.rawQuery(sql,null);
-            if(!cursor.moveToFirst())
-            {
-                cursor.close();
-                nodata.setVisibility(View.VISIBLE);
-            }
-            else {
-                nodata.setVisibility(View.GONE);
+           // Log.v("sql",sql);
+//            if(!cursor.moveToFirst())//我好像知道为甚么了，因为在做这个判断的时候他已经光标移动到第一行了！！！
+//            {
+//                cursor.close();
+//                nodata.setVisibility(View.VISIBLE);
+//            }
+//            else {
+
+//                if(cursor.moveToFirst())
+//                {
+//                    String start_time = cursor.getString(cursor.getColumnIndex("start_datetime"));
+//
+//                    Log.v("data1",start_time);
+//                }
+
                 while (cursor.moveToNext()) {
                     String device_type = cursor.getString(cursor.getColumnIndex("devicetype"));
                     String device_name = cursor.getString(cursor.getColumnIndex("devicename"));
@@ -422,10 +433,19 @@ public class HistoryAlarmActivity extends AppCompatActivity implements View.OnCl
                     String alarm_type = cursor.getString(cursor.getColumnIndex("alarmtype"));
                     String alarm_reason = cursor.getString(cursor.getColumnIndex("alarmreason"));
                     String solve_method = cursor.getString(cursor.getColumnIndex("solvingmethod"));
+                    //Log.v("data",start_time);
                     dataList.add(new HisAlarmBean(device_type, device_name, start_time, end_time, alarm_info, alarm_type, alarm_reason, solve_method));
                 }
                 cursor.close();
-            }
+                if(dataList.size()==0)//判断是否非空不要用光标，否则直接定位到1位置，用movetoNext找不到第一行！
+                {
+                    nodata.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    nodata.setVisibility(View.GONE);
+                }
+//            }
             LoadingDialog.dismiss();
             setList();
             handler.removeCallbacks(SearchTask);

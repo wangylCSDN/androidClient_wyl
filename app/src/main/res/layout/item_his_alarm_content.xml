@@ -36,7 +36,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="设备名称："
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         />
 
@@ -48,7 +48,7 @@
                         android:singleLine="true"
                         android:layout_marginLeft="8dp"
                         android:textColor="#000000"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:ems="20"/>
                 </LinearLayout>
 
@@ -63,7 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="报警名称："
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         />
 
@@ -75,7 +75,7 @@
                         android:singleLine="true"
                         android:layout_marginLeft="8dp"
                         android:textColor="#000000"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:ems="20"/>
                 </LinearLayout>
 
@@ -90,7 +90,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="报警等级："
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         />
 
@@ -102,7 +102,7 @@
                         android:singleLine="true"
                         android:layout_marginLeft="8dp"
                         android:textColor="#000000"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:ems="20"/>
                 </LinearLayout>
                 <LinearLayout
@@ -117,7 +117,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="报警开始时间："
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         />
 
@@ -129,7 +129,7 @@
                         android:singleLine="true"
                         android:layout_marginLeft="8dp"
                         android:textColor="#000000"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:ems="40"/>
                 </LinearLayout>
 
@@ -154,7 +154,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="报警原因："
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         />
 
@@ -167,7 +167,7 @@
                         android:singleLine="true"
                         android:text="33333"
                         android:textColor="#000000"
-                        android:textSize="20sp" />
+                        android:textSize="15sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -182,7 +182,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="报警解决办法："
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         />
 
@@ -194,7 +194,7 @@
                         android:singleLine="true"
                         android:layout_marginLeft="8dp"
                         android:textColor="#000000"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:ems="40"/>
                 </LinearLayout>
                 <LinearLayout
@@ -209,7 +209,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="报警结束时间："
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         />
 
@@ -221,7 +221,7 @@
                         android:singleLine="true"
                         android:layout_marginLeft="8dp"
                         android:textColor="#000000"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:ems="40"/>
                 </LinearLayout>
             </LinearLayout>
