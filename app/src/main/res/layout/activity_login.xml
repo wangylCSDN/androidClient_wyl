@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bp2"
+    android:background="@mipmap/bg1"
     tools:context="com.example.wqter.androidclient_mypart.LoginActivity">
     <LinearLayout
         android:id="@+id/loginPanel"

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">AndroidClient_myPart</string>
+    <string name="common_dialog_true">确定</string>
+    <string name="common_dialog_false">取消</string>
+
 </resources>

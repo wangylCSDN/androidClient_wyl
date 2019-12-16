@@ -6,4 +6,10 @@
 
     <color name="lite_blue">#ff359ff2</color>
     <color name="color_even">#fb9428</color>
+    <color name="background">#f4f4f4</color>
+    <color name="item_bg">#ffffff</color>
+    <color name="editText_text">#FF5A5A5A</color>
+    <color name="blue">#1296db</color>
+    <color name="table_first">#B0E0E6</color>
+
 </resources>

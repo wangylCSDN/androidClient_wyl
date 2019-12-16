@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="ttyACM">
+        <item> </item>
+        <item>ttyACM0</item>
+        <item>ttyACM1 </item>
+        <item>ttyACM2</item>
+        <item>ttyACM3</item>
+        <item>ttyACM4</item>
+        <item>ttyACM5</item>
+        <item>ttyACM6</item>
+        <item>ttyACM7</item>
+    </string-array>
     <string-array name="deviceType">
         <item> </item>
         <item>空调</item>
