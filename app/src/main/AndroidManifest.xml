@@ -26,6 +26,8 @@
         <activity android:name=".DeviceConfirmActivity"/>
         <activity android:name=".HistoryDataActivity"/>
         <activity android:name=".HistoryAlarmActivity"/>
+        <activity android:name=".HtmlActvity"/>
+        <activity android:name=".NowAlarmActivity"/>
 
     </application>
 

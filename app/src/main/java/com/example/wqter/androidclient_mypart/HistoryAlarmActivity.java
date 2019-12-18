@@ -466,6 +466,7 @@ public class HistoryAlarmActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     protected void onDestroy() {
+
         setContentView(R.layout.view_null);
         super.onDestroy();
     }

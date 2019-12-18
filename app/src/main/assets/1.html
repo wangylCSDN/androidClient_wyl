@@ -1,0 +1,31 @@
+<volist name="Data" id="vo">
+<eq name="vo.kid_fun_code" value="0x0000">
+<div>{$vo.chi_name}</div><br>
+
+<else/>
+
+<table class="table-striped">
+<tr>
+<td>{$vo.chi_name}</td>
+<td>{$vo.en_name}</td>
+<td>{$vo.fun_code}</td>
+<td>{$vo.kid_fun_code}</td>
+<td>{$vo.data_type}</td>
+<td>{$vo.unit}</td>
+<td>{$vo.pa_range}</td>
+<td>{$vo.read_type}</td>
+<td>{$vo.desc_data}</td>
+<td>{$vo.attr_num}</td>
+<td>{$vo.req_num}</td>
+<td>{$vo.in_terms}</td>
+<td>{$vo.in_scenes}</td>
+<td>{$vo.in_example}</td>
+<td>{$vo.change_data}</td>
+</tr>
+</table>
+
+</eq>
+
+</volist>
+
++'<tr><th>'+'参数名称'+'</th><th>'+'英文名称'+'</th><th>'+'参数块代码'+'</th><th>'+'子参数代码'+'</th><th>'+'数据类型'+'</th><th>'+'单位'+'</th><th>'+'值域范围'+'</th><th>'+'参数域'+'</th><th>'+'参数读(写)类型'+'</th><th>'+'描述'+'</th><th>'+’+'</th><th>'+'必选编号'+'</th><th>'+'所在条款'+'</th><th>'+'所在场景'+'</th><th>'+'举例验证'+'</td><td>'+'修订情况'+'</th></tr>'
