@@ -261,7 +261,7 @@ public class NowAlarmFragment extends android.support.v4.app.Fragment {
 
         }
         cursor.close();
-        String table_name="table_device_alarmcomment_ttyACM"+com+"device"+device_code;
+        String table_name="table_device_alarmcomment_ttyACM"+com+"_device"+device_code;
         String sql_update= "update "+table_name+" set state ='0' where alarm_name = '"+bean_shield.alarm_info+"' and devicename='"+bean_shield.device_name+"'";
         db.execSQL(sql_update);
     }
@@ -284,7 +284,7 @@ public class NowAlarmFragment extends android.support.v4.app.Fragment {
         {
             list_id.clear();
         }
-        Cursor cursor = db.rawQuery("select * from table_allalarm", null);
+        Cursor cursor = db.rawQuery("select * from table_allalarm where ending_datetime='持续报警' order by start_datetime desc", null);
         while (cursor.moveToNext()){
             String all_id=cursor.getString(cursor.getColumnIndex("id"));
             String device_type = cursor.getString(cursor.getColumnIndex("devicetype"));
@@ -333,8 +333,7 @@ public class NowAlarmFragment extends android.support.v4.app.Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        handler.removeCallbacks(timeTask);
-        db=null;
+        //handler.removeCallbacks(timeTask);
         ViewGroup mGroup=(ViewGroup) mView.getParent();
         if(mGroup!=null){
             mGroup.removeView(mView);

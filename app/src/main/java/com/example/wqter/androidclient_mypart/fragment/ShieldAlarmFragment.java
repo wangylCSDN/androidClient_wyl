@@ -146,7 +146,7 @@ public class ShieldAlarmFragment extends android.support.v4.app.Fragment {
             com=cursor.getString(cursor.getColumnIndex("com"));
         }
         cursor.close();
-        String table_name="table_device_alarmcomment_ttyACM"+com+"device"+device_code;
+        String table_name="table_device_alarmcomment_ttyACM"+com+"_device"+device_code;
         String sql_update= "update "+table_name+" set state ='1' where alarm_name = '"+bean.alarm_info+"' and devicename='"+bean.device_name+"'";
         db.execSQL(sql_update);
 
@@ -218,8 +218,7 @@ public class ShieldAlarmFragment extends android.support.v4.app.Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        handler.removeCallbacks(timeTask);
-        db=null;
+        //handler.removeCallbacks(timeTask);
         ViewGroup mGroup=(ViewGroup) mView.getParent();
         if(mGroup!=null){
             mGroup.removeView(mView);
