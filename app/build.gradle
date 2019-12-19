@@ -27,12 +27,23 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+    //提交按钮
     compile 'com.unstoppable:submitbutton:1.1.3'
     compile 'com.contrarywind:Android-PickerView:3.2.7'
+    //加载的样式
     compile 'com.zyao89:zloading:1.0.8'
     compile 'com.android.support:design:26.0.0-alpha1'
+    //刷新控件
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    //listview左右划菜单，操作 https://github.com/baoyongzhang/SwipeMenuListView
     compile 'com.baoyz.swipemenulistview:library:1.3.0'
+
+    //万能adapter https://github.com/hongyangAndroid/baseAdapter
+    compile 'com.zhy:base-rvadapter:3.0.3'
+    compile 'com.zhy:base-adapter:3.0.3'
+    //弹框，https://github.com/saiwu-bigkoo/Android-AlertView
+    compile 'com.bigkoo:alertview:1.0.3'
+
 
 }

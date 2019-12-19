@@ -188,7 +188,7 @@ public class ConfirmAlarmFragment extends android.support.v4.app.Fragment {
         }
         cursor.close();
         String table_name="table_device_alarmcomment_ttyACM"+com+"device"+device_code;
-        String sql_update= "update "+table_name+" set state ='0' where alarm_name = '"+bean_shield.alarm_info+"'";
+        String sql_update= "update "+table_name+" set state ='0' where alarm_name = '"+bean_shield.alarm_info+"' and devicename='"+bean_shield.device_name+"'";
         db.execSQL(sql_update);
     }
     private Runnable timeTask = new Runnable() {
