@@ -12,4 +12,6 @@
     <color name="blue">#1296db</color>
     <color name="table_first">#B0E0E6</color>
 
+    <color name="textcolor">#ffffff</color>
+    <color name="texttitlecolor">#39A8C4</color>
 </resources>

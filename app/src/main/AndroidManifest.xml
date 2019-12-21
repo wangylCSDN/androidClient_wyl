@@ -28,6 +28,7 @@
         <activity android:name=".HistoryAlarmActivity"/>
         <activity android:name=".HtmlActvity"/>
         <activity android:name=".NowAlarmActivity"/>
+        <activity android:name=".fragment.DetialActivity"/>
 
     </application>
 

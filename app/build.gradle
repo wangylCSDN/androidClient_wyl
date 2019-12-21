@@ -44,6 +44,13 @@ dependencies {
     compile 'com.zhy:base-adapter:3.0.3'
     //弹框，https://github.com/saiwu-bigkoo/Android-AlertView
     compile 'com.bigkoo:alertview:1.0.3'
+    //spinner控件
+    compile 'com.weiwangcn.betterspinner:library:1.1.0'
+    //https://github.com/huangyanbin/smartTable
+    compile 'com.github.huangyanbin:SmartTable:2.2.0'
+    //https://blog.csdn.net/zuowenzhan/article/details/61910428
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
 
 
 }

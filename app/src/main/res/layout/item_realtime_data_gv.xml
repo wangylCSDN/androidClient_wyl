@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Space
+        android:layout_width="10dp"
+        android:layout_height="match_parent"
+        android:id="@+id/space_ups_gv"
+        android:layout_centerInParent="true"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/green"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/ups_gv_image"
+        android:layout_toLeftOf="@id/space_ups_gv"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/space_ups_gv"
+        android:id="@+id/ups_gv_tv"
+        android:text="wwwwww"
+        android:textSize="15sp"
+        android:layout_alignBottom="@id/ups_gv_image"
+        android:textColor="@color/texttitlecolor"/>
+
+
+
+</RelativeLayout>
