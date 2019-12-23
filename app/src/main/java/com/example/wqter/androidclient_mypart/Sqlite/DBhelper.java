@@ -60,6 +60,7 @@ public class DBhelper extends SQLiteOpenHelper {
                 "copyright text)";
         sqLiteDatabase.execSQL(sysSQL);
 
+
     }
 
     @Override
