@@ -30,7 +30,7 @@ public class HtmlActvity extends AppCompatActivity {
         WebView=(android.webkit.WebView)findViewById(R.id.test_html);
         initWebView initWebView=new initWebView (WebView);
         initWebView.setWebViewStyle();
-        WebView.loadUrl("file:///android_asset/1.html");
+        WebView.loadUrl("http://www.baidu.com");
     }
 
 }

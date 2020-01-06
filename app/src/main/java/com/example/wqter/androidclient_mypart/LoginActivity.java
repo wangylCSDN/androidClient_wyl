@@ -217,7 +217,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //TODO 需不需要进行判断，权限不够直接跳转到主界面
         //或者全部跳转，在设备确认界面里面低权限的无法操作！类似大动环。
         Intent intent = new Intent();
-        intent.setClass(LoginActivity.this,DetialActivity.class);
+        intent.setClass(LoginActivity.this,HtmlActvity.class);
         startActivity(intent);
         finish();
 
@@ -234,7 +234,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void AutoLogin(){
         //直接跳转
         Intent intent=new Intent();
-        intent.setClass(LoginActivity.this,DetialActivity.class);
+        intent.setClass(LoginActivity.this,HtmlActvity.class);
         startActivity(intent);
         finish();
 
